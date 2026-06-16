@@ -1,139 +1,37 @@
-<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="인터랙티브 컴퓨팅 프로젝트를 소개하는 GitHub Pages 웹사이트입니다."
-    />
-    <meta name="theme-color" content="#0b1020" />
-    <title>Interactive Computing</title>
-    <link rel="stylesheet" href="./styles.css" />
-    <script src="./script.js" defer></script>
-  </head>
-  <body>
-    <a class="skip-link" href="#main">본문으로 바로가기</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Computing</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header>
+    <span class="class-title">Interactive Computing</span>
+    <span class="sketch-title"></span>
+    <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
 
-    <header class="site-header">
-      <nav class="nav container" aria-label="주요 메뉴">
-        <a class="brand" href="./" aria-label="Interactive Computing 홈">
-          <span class="brand-mark" aria-hidden="true"></span>
-          Interactive Computing
-        </a>
+  <main>
+    <div id="app" aria-label="week15 sketch"></div>
+  </main>
 
-        <div class="nav-links">
-          <a href="#about">소개</a>
-          <a href="#projects">프로젝트</a>
-          <a href="#contact">연락처</a>
-          <button class="theme-toggle" type="button" aria-label="색상 테마 변경">
-            테마
-          </button>
-        </div>
-      </nav>
-    </header>
+  <nav class="sidebar" id="site-menu" aria-hidden="true">
+    <div class="sidebar-header">
+      <button class="close-btn" type="button" aria-label="Close menu"></button>
+    </div>
+    <div class="sidebar-body">
+      <ul class="sketch-list"></ul>
+    </div>
+  </nav>
 
-    <main id="main">
-      <section class="hero container">
-        <div class="hero-copy">
-          <p class="eyebrow">INTERACTIVE COMPUTING</p>
-          <h1>아이디어를<br /><span>움직이는 경험</span>으로.</h1>
-          <p class="hero-description">
-            코드, 디자인, 상호작용을 연결해 사람과 기술이 만나는 새로운
-            장면을 만듭니다.
-          </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#projects">프로젝트 보기</a>
-            <a class="button button-secondary" href="#about">더 알아보기</a>
-          </div>
-        </div>
-
-        <div class="hero-visual" aria-hidden="true">
-          <div class="orb orb-one"></div>
-          <div class="orb orb-two"></div>
-          <div class="grid-card">
-            <span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span>
-          </div>
-        </div>
-      </section>
-
-      <section class="section container" id="about">
-        <div class="section-heading">
-          <p class="eyebrow">ABOUT</p>
-          <h2>탐색하고, 만들고, 연결합니다.</h2>
-        </div>
-
-        <div class="feature-grid">
-          <article class="feature-card">
-            <p class="card-number">01</p>
-            <h3>Creative Coding</h3>
-            <p>코드를 표현의 도구로 사용해 시각적이고 실험적인 작업을 만듭니다.</p>
-          </article>
-          <article class="feature-card">
-            <p class="card-number">02</p>
-            <h3>Interaction</h3>
-            <p>사용자의 움직임과 선택에 반응하는 자연스러운 경험을 설계합니다.</p>
-          </article>
-          <article class="feature-card">
-            <p class="card-number">03</p>
-            <h3>Web Technology</h3>
-            <p>웹 표준을 기반으로 어디서든 접근할 수 있는 결과물을 구현합니다.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section projects-section" id="projects">
-        <div class="container">
-          <div class="section-heading section-heading-row">
-            <div>
-              <p class="eyebrow">SELECTED WORK</p>
-              <h2>프로젝트</h2>
-            </div>
-            <p class="section-note">프로젝트 카드의 내용을 실제 작업으로 교체해 보세요.</p>
-          </div>
-
-          <div class="project-grid">
-            <article class="project-card project-card-large">
-              <div class="project-art art-one" aria-hidden="true"></div>
-              <div class="project-copy">
-                <p>Web Interaction</p>
-                <h3>첫 번째 프로젝트</h3>
-              </div>
-            </article>
-            <article class="project-card">
-              <div class="project-art art-two" aria-hidden="true"></div>
-              <div class="project-copy">
-                <p>Creative Coding</p>
-                <h3>두 번째 프로젝트</h3>
-              </div>
-            </article>
-            <article class="project-card">
-              <div class="project-art art-three" aria-hidden="true"></div>
-              <div class="project-copy">
-                <p>Experiment</p>
-                <h3>세 번째 프로젝트</h3>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="contact section container" id="contact">
-        <p class="eyebrow">CONTACT</p>
-        <h2>새로운 아이디어를<br />함께 이야기해요.</h2>
-        <a class="button button-primary" href="mailto:your-email@example.com">
-          이메일 보내기
-        </a>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-content">
-        <p>Interactive Computing</p>
-        <p>&copy; <span id="current-year"></span> All rights reserved.</p>
-      </div>
-    </footer>
-  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+  <script src="./app.js"></script>
+</body>
 </html>

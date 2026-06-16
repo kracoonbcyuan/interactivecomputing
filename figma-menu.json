@@ -1,0 +1,39 @@
+{
+  "figma": {
+    "url": "https://www.figma.com/design/zaxA2866JUMHGEgGubBO87/interactive_computing?node-id=1-2",
+    "fileKey": "zaxA2866JUMHGEgGubBO87",
+    "homeNodeId": "1:2",
+    "menuPopoutNodeId": "7:84",
+    "menusNodeId": "7:82"
+  },
+  "items": [
+    {
+      "frameName": "preacher",
+      "nodeId": "17:92",
+      "title": "preacher",
+      "script": "preacher.js",
+      "enabled": true
+    },
+    {
+      "frameName": "watchman",
+      "nodeId": "17:102",
+      "title": "watchman",
+      "script": "watchman.js",
+      "enabled": true
+    },
+    {
+      "frameName": "lotus",
+      "nodeId": "30:2",
+      "title": "lotus",
+      "script": "lotus.js",
+      "enabled": true
+    },
+    {
+      "frameName": "goldfish",
+      "nodeId": "31:4",
+      "title": "goldfish",
+      "script": "goldfish.js",
+      "enabled": true
+    }
+  ]
+}
