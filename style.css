@@ -135,7 +135,7 @@ body.has-sketch #app {
   z-index: 40;
   width: var(--sidebar-width);
   min-height: 100dvh;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.28);
   transform: translate3d(100%, 0, 0);
   transition: transform 720ms var(--ease-out-expo);
   will-change: transform;
@@ -156,7 +156,7 @@ body.menu-open .sidebar {
   width: 100%;
   height: var(--menu-top);
   border: 0;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.28);
   cursor: pointer;
 }
 

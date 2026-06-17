@@ -34,6 +34,69 @@
       "title": "goldfish",
       "script": "goldfish.js",
       "enabled": true
+    },
+    {
+      "frameName": "heron_eye",
+      "nodeId": null,
+      "title": "heron_eye",
+      "script": "heron_eye.js",
+      "enabled": true
+    },
+    {
+      "frameName": "underwater",
+      "nodeId": null,
+      "title": "underwater",
+      "script": "underwater.js",
+      "enabled": true
+    },
+    {
+      "frameName": "4",
+      "nodeId": null,
+      "title": "4",
+      "script": "4.js",
+      "enabled": true
+    },
+    {
+      "frameName": "ainu",
+      "nodeId": null,
+      "title": "ainu",
+      "script": "ainu.js",
+      "enabled": true
+    },
+    {
+      "frameName": "party",
+      "nodeId": null,
+      "title": "party",
+      "script": "party.js",
+      "enabled": true
+    },
+    {
+      "frameName": "hi",
+      "nodeId": null,
+      "title": "hi",
+      "script": "hi.js",
+      "enabled": true
+    },
+    {
+      "frameName": "wordwar",
+      "nodeId": null,
+      "title": "wordwar",
+      "script": "wordwar.js",
+      "enabled": true
+    },
+    {
+      "frameName": "chihuahua",
+      "nodeId": null,
+      "title": "chihuahua",
+      "script": "chihuahua.js",
+      "enabled": true
+    },
+    {
+      "frameName": "ps1",
+      "nodeId": null,
+      "title": "ps1",
+      "script": "ps1.js",
+      "enabled": true
     }
   ]
 }
