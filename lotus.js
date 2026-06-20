@@ -10,7 +10,8 @@ function setup() {
 function draw() {
 	background('#19020a');
 
-	let spacing = 220;
+	let spacing = 200;
+	let margin = 300;
 
 	let t = (frameCount % cycleFrames) / cycleFrames;
 	
@@ -33,8 +34,8 @@ function draw() {
 	translate(-width / 2, -height / 2);
 
 
-	for (let x =100; x < width + 200; x += spacing) {
-		for (let y = -100; y < height + 200; y += spacing) {
+		for (let x = -margin; x < width + margin; x += spacing) {
+		for (let y = -margin; y < height + margin; y += spacing) {
 			push();
 			translate(x, y);
 
