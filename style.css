@@ -1,17 +1,15 @@
 :root {
   --home: #1a00ff;
   --text: #eaff00;
-  --text-stroke: #1a00ff;
-  --text-stroke-width: clamp(2px, 0.22vmin, 4px);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --sidebar-width: clamp(96px, min(10vw, 14vh), 150px);
   --header-x: clamp(18px, min(2.1vw, 4vh), 40px);
   --header-y: clamp(18px, min(3.1vh, 2.8vw), 44px);
   --menu-x: clamp(12px, min(1.8vw, 3vh), 26px);
-  --menu-y: clamp(12px, min(1.8vh, 1.4vw), 22px);
-  --bar-width: clamp(18px, min(2vw, 3vh), 28px);
-  --bar-height: clamp(2px, 0.3vmin, 4px);
-  --bar-gap: clamp(3px, 0.55vmin, 6px);
+  --menu-y: clamp(24px, min(3.52vh, 2.5vw), 36px);
+  --bar-width: clamp(20px, min(1.95vw, 2.73vh), 28px);
+  --bar-height: clamp(3px, 0.39vh, 4px);
+  --bar-gap: 0px;
   --menu-font: clamp(9px, min(1.12vw, 1.65vh), 16px);
   --menu-gap: clamp(10px, min(2vh, 1.4vw), 20px);
   --menu-top: clamp(48px, min(7.3vh, 5.2vw), 75px);
@@ -47,13 +45,6 @@ header {
 }
 
 .class-title,
-.sketch-title,
-.sketch-list button {
-  -webkit-text-stroke: var(--text-stroke-width) var(--text-stroke);
-  paint-order: stroke fill;
-}
-
-.class-title,
 .sketch-title {
   position: fixed;
   top: var(--header-y);
@@ -76,6 +67,11 @@ header {
   transition: opacity 160ms ease;
 }
 
+body.has-sketch .class-title,
+body.has-sketch .sketch-title {
+  opacity: 0;
+  pointer-events: none;
+}
 .class-title:hover {
   opacity: 0.72;
 }
@@ -94,7 +90,7 @@ header {
   z-index: 50;
   display: flex;
   width: calc(var(--bar-width) + 14px);
-  height: calc(var(--bar-height) * 3 + var(--bar-gap) * 2 + 14px);
+  height: calc(var(--bar-height) * 5 + var(--bar-gap) * 4 + 14px);
   flex-direction: column;
   justify-content: center;
   gap: var(--bar-gap);
@@ -111,7 +107,9 @@ header {
   height: var(--bar-height);
   border-radius: 999px;
   background: var(--text);
-  box-shadow: 0 0 0 var(--text-stroke-width) var(--text-stroke);
+}
+.hamburger span:nth-child(even) {
+  background: var(--home);
 }
 
 main {
@@ -223,7 +221,6 @@ body.menu-open .sidebar {
     --menu-font: clamp(8px, 2.8vw, 11px);
     --menu-gap: 10px;
     --menu-top: 52px;
-    --text-stroke-width: 2px;
   }
 
   .class-title,
