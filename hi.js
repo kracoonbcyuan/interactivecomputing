@@ -106,13 +106,35 @@ function draw() {
     text(label, width / 2, height / 2);
   }
 
-  if (video && video.elt && video.elt.readyState >= 2) {
-    push();
-    translate(160, 0);
-    scale(-1, 1);
-    image(video, 0, 0, 160, 120);
-    pop();
+  drawMirroredVideoFit(video, 0, 0, 160, 120);
+}
+
+function drawMirroredVideoFit(source, x, y, boxW, boxH) {
+  if (!source || !source.elt || source.elt.readyState < 2) {
+    return;
   }
+
+  const sourceW = source.elt.videoWidth || source.width || boxW;
+  const sourceH = source.elt.videoHeight || source.height || boxH;
+  const sourceRatio = sourceW / sourceH;
+  const boxRatio = boxW / boxH;
+  let drawW = boxW;
+  let drawH = boxH;
+
+  if (sourceRatio > boxRatio) {
+    drawH = boxW / sourceRatio;
+  } else {
+    drawW = boxH * sourceRatio;
+  }
+
+  const drawX = x + (boxW - drawW) / 2;
+  const drawY = y + (boxH - drawH) / 2;
+
+  push();
+  translate(x + boxW, y);
+  scale(-1, 1);
+  image(source, boxW - (drawX - x) - drawW, drawY - y, drawW, drawH);
+  pop();
 }
 
 function updateSvg(svgEl, x, y, isFlipped) {

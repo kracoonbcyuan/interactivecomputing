@@ -81,13 +81,15 @@ function draw() {
   if (handVisible && isDetectingFace && faces.length > 0) {
     let face = faces[0];
     let pt13 = face.keypoints[13]; 
-    let pt14 = face.keypoints[14]; 
+    let pt14 = face.keypoints[14];
+    let mapped13 = mapCameraPoint(pt13);
+    let mapped14 = mapCameraPoint(pt14);
+    let cameraFit = getCameraFit();
+    let mouthDist = dist(mapped13.x, mapped13.y, mapped14.x, mapped14.y);
     
-    let mouthDist = dist(pt13.x, pt13.y, pt14.x, pt14.y);
-    
-    if (mouthDist > 11) {
-      let spawnX = width - (pt13.x + pt14.x) / 2;
-      let spawnY = (pt13.y + pt14.y) / 2;
+    if (mouthDist > 11 * cameraFit.scale) {
+      let spawnX = (mapped13.x + mapped14.x) / 2;
+      let spawnY = (mapped13.y + mapped14.y) / 2;
       
       particles.push(new LetterParticle(spawnX, spawnY));
       particles.push(new LetterParticle(spawnX, spawnY));
@@ -102,12 +104,7 @@ function draw() {
       particles.splice(i, 1);
     }
   }
-
-  // 7. 거울 모드 시작 (얼굴과 손 메쉬 렌더링)
-  push(); 
-  translate(width, 0); 
-  scale(-1, 1); 
-  
+  // 7. 얼굴과 손 메쉬 렌더링
   if (isDetectingFace && faces.length > 0) {
     drawLips(); 
   }
@@ -115,8 +112,6 @@ function draw() {
   if (isDetectingHand && hands.length > 0) {
     drawHands(); 
   }
-  
-  pop(); 
 }
 
 // --- 문자 파티클 클래스 ---
@@ -215,6 +210,28 @@ function drawCharacter(x, k) {
   pop();
 }
 
+function getCameraFit() {
+  const sourceW = video && video.elt ? (video.elt.videoWidth || video.width || width) : width;
+  const sourceH = video && video.elt ? (video.elt.videoHeight || video.height || height) : height;
+  const scale = Math.min(width / sourceW, height / sourceH);
+
+  return {
+    scale,
+    offsetX: (width - sourceW * scale) / 2,
+    offsetY: (height - sourceH * scale) / 2,
+  };
+}
+
+function mapCameraPoint(point, mirror = true) {
+  const fit = getCameraFit();
+  const x = fit.offsetX + point.x * fit.scale;
+  const y = fit.offsetY + point.y * fit.scale;
+
+  return {
+    x: mirror ? width - x : x,
+    y,
+  };
+}
 function drawLips() {
   for (let i = 0; i < faces.length; i++) {
     let face = faces[i];
@@ -224,13 +241,15 @@ function drawLips() {
     for (let j = 0; j < lipsExterior.length; j++) {
       let index = lipsExterior[j];
       let keypoint = face.keypoints[index];
-      vertex(keypoint.x, keypoint.y);
+      let mapped = mapCameraPoint(keypoint);
+      vertex(mapped.x, mapped.y);
     }
     beginContour();
     for (let j = lipsInterior.length - 1; j >= 0; j--) {
       let index = lipsInterior[j];
       let keypoint = face.keypoints[index];
-      vertex(keypoint.x, keypoint.y);
+      let mapped = mapCameraPoint(keypoint);
+      vertex(mapped.x, mapped.y);
     }
     endContour(); 
     endShape(CLOSE); 
@@ -247,13 +266,14 @@ function drawHands() {
     for (let j = 0; j < palmIndices.length; j++) {
       let index = palmIndices[j];
       let keypoint = hand.keypoints[index];
-      vertex(keypoint.x, keypoint.y);
+      let mapped = mapCameraPoint(keypoint);
+      vertex(mapped.x, mapped.y);
     }
     endShape(CLOSE);
     
     for (let j = 0; j < fingerSegments.length; j++) {
-      let pt1 = hand.keypoints[fingerSegments[j][0]]; 
-      let pt2 = hand.keypoints[fingerSegments[j][1]]; 
+      let pt1 = mapCameraPoint(hand.keypoints[fingerSegments[j][0]]); 
+      let pt2 = mapCameraPoint(hand.keypoints[fingerSegments[j][1]]); 
       let midX = (pt1.x + pt2.x) / 2;
       let midY = (pt1.y + pt2.y) / 2;
       let d = dist(pt1.x, pt1.y, pt2.x, pt2.y);
