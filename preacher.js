@@ -211,8 +211,8 @@ function drawCharacter(x, k) {
 }
 
 function getCameraFit() {
-  const sourceW = video && video.elt ? (video.elt.videoWidth || video.width || width) : width;
-  const sourceH = video && video.elt ? (video.elt.videoHeight || video.height || height) : height;
+  const sourceW = video ? (video.width || width) : width;
+  const sourceH = video ? (video.height || height) : height;
   const scale = Math.min(width / sourceW, height / sourceH);
 
   return {

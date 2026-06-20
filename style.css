@@ -2,11 +2,10 @@
   --home: #1a00ff;
   --text: #eaff00;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --header-height: clamp(56px, min(8vh, 6vw), 86px);
   --sidebar-width: clamp(96px, min(10vw, 14vh), 150px);
   --header-x: clamp(18px, min(2.1vw, 4vh), 40px);
-  --header-y: clamp(18px, min(3.1vh, 2.8vw), 44px);
   --menu-x: clamp(12px, min(1.8vw, 3vh), 26px);
-  --menu-y: clamp(12px, min(1.8vh, 1.4vw), 22px);
   --bar-width: clamp(18px, min(2vw, 3vh), 28px);
   --bar-height: clamp(2px, 0.3vmin, 4px);
   --bar-gap: clamp(3px, 0.55vmin, 6px);
@@ -28,6 +27,8 @@ body {
 }
 
 body {
+  display: grid;
+  grid-template-rows: var(--header-height) 1fr;
   overflow: hidden;
   background: var(--home);
   color: var(--text);
@@ -38,25 +39,32 @@ button {
 }
 
 header {
-  position: fixed;
-  inset: 0 0 auto 0;
-  z-index: 30;
-  pointer-events: none;
+  position: relative;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+  height: var(--header-height);
+  padding: 0 var(--header-x);
+  background: var(--home);
 }
 
 .class-title,
 .sketch-title {
-  position: fixed;
-  top: var(--header-y);
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
   color: var(--text);
   font-weight: 900;
   line-height: 1;
   letter-spacing: 0;
-  pointer-events: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .class-title {
-  left: var(--header-x);
+  justify-self: start;
   font-size: clamp(14px, min(1.67vw, 2.34vh), 24px);
   text-transform: uppercase;
   cursor: pointer;
@@ -68,19 +76,17 @@ header {
 }
 
 .sketch-title {
-  left: 50%;
-  transform: translateX(-50%);
+  justify-self: center;
   font-size: clamp(10px, min(1.1vw, 1.76vh), 16px);
+  text-align: center;
 }
 
 .hamburger {
-  position: fixed;
-  top: calc(var(--menu-y) - 7px);
-  right: calc(var(--menu-x) - 7px);
   z-index: 50;
   display: flex;
   width: calc(var(--bar-width) + 14px);
   height: calc(var(--bar-height) * 3 + var(--bar-gap) * 2 + 14px);
+  justify-self: end;
   flex-direction: column;
   justify-content: center;
   gap: var(--bar-gap);
@@ -88,7 +94,6 @@ header {
   border: 0;
   background: transparent;
   cursor: pointer;
-  pointer-events: auto;
 }
 
 .hamburger span {
@@ -101,7 +106,8 @@ header {
 
 main {
   width: 100vw;
-  height: 100dvh;
+  height: calc(100dvh - var(--header-height));
+  min-height: 0;
   background: var(--home);
 }
 
@@ -124,17 +130,18 @@ body.has-sketch #app {
 
 #app canvas {
   display: block;
-  width: min(100vw, calc(100dvh * var(--sketch-ratio, 1.333333))) !important;
+  width: min(100vw, calc((100dvh - var(--header-height)) * var(--sketch-ratio, 1.333333))) !important;
   height: auto !important;
   max-width: 100vw;
+  max-height: 100%;
 }
 
 .sidebar {
   position: fixed;
-  inset: 0 0 0 auto;
+  inset: var(--header-height) 0 0 auto;
   z-index: 40;
   width: var(--sidebar-width);
-  min-height: 100dvh;
+  min-height: calc(100dvh - var(--header-height));
   background: rgba(0, 0, 0, 0.28);
   transform: translate3d(100%, 0, 0);
   transition: transform 720ms var(--ease-out-expo);
@@ -156,7 +163,7 @@ body.menu-open .sidebar {
   width: 100%;
   height: var(--menu-top);
   border: 0;
-  background: rgba(0, 0, 0, 0.28);
+  background: transparent;
   cursor: pointer;
 }
 
@@ -198,35 +205,39 @@ body.menu-open .sidebar {
 
 @media (max-width: 700px) {
   :root {
+    --header-height: 70px;
     --sidebar-width: clamp(78px, 25vw, 112px);
     --header-x: 16px;
-    --header-y: 18px;
-    --menu-x: 12px;
-    --menu-y: 12px;
     --bar-width: clamp(18px, 6vw, 24px);
     --menu-font: clamp(8px, 2.8vw, 11px);
     --menu-gap: 10px;
     --menu-top: 52px;
   }
 
-  .class-title,
-  .sketch-title {
-    max-width: calc(100vw - var(--sidebar-width) - 48px);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    column-gap: 12px;
   }
 
   .class-title {
+    grid-column: 1;
+    grid-row: 1;
     font-size: clamp(12px, 3.5vw, 16px);
   }
 
   .sketch-title {
-    top: calc(var(--header-y) + 20px);
-    left: var(--header-x);
-    transform: none;
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
     font-size: clamp(9px, 2.8vw, 12px);
     text-align: left;
+  }
+
+  .hamburger {
+    grid-column: 2;
+    grid-row: 1 / 3;
   }
 }
 
