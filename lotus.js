@@ -11,7 +11,7 @@ function draw() {
 	background('#19020a');
 
 	let spacing = 200;
-	let margin = 300;
+	let margin = 600;
 
 	let t = (frameCount % cycleFrames) / cycleFrames;
 	
