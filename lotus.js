@@ -10,8 +10,8 @@ function setup() {
 function draw() {
 	background('#19020a');
 
-	let spacing = 200;
-	let margin = 600;
+	let spacing = 100;
+	let margin = 350;
 
 	let t = (frameCount % cycleFrames) / cycleFrames;
 	
