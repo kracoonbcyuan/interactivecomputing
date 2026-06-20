@@ -211,31 +211,21 @@ function drawCharacter(x, k) {
 }
 
 function getCameraFit() {
-  const realW = video && video.elt ? (video.elt.videoWidth || video.width || width) : width;
-  const realH = video && video.elt ? (video.elt.videoHeight || video.height || height) : height;
-  const p5W = video ? (video.width || realW) : realW;
-  const p5H = video ? (video.height || realH) : realH;
-  const shouldRotate = realH > realW && width > height;
-  const sourceW = shouldRotate ? p5H : p5W;
-  const sourceH = shouldRotate ? p5W : p5H;
+  const sourceW = video ? (video.width || width) : width;
+  const sourceH = video ? (video.height || height) : height;
   const scale = Math.min(width / sourceW, height / sourceH);
 
   return {
     scale,
     offsetX: (width - sourceW * scale) / 2,
     offsetY: (height - sourceH * scale) / 2,
-    rotate: shouldRotate,
-    rawW: p5W,
   };
 }
 
 function mapCameraPoint(point, mirror = true) {
   const fit = getCameraFit();
-  const rotated = fit.rotate
-    ? { x: point.y, y: fit.rawW - point.x }
-    : { x: point.x, y: point.y };
-  const x = fit.offsetX + rotated.x * fit.scale;
-  const y = fit.offsetY + rotated.y * fit.scale;
+  const x = fit.offsetX + point.x * fit.scale;
+  const y = fit.offsetY + point.y * fit.scale;
 
   return {
     x: mirror ? width - x : x,
