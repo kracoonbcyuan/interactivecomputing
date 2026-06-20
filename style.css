@@ -125,14 +125,17 @@ main {
   place-items: center;
   overflow: hidden;
   border: 0;
+  visibility: hidden;
   opacity: 0;
   pointer-events: none;
-  background: #000000;
+  background: transparent;
 }
 
 body.has-sketch #app {
+  visibility: visible;
   opacity: 1;
   pointer-events: auto;
+  background: #000000;
 }
 
 #app canvas {

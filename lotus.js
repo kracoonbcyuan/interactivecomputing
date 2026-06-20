@@ -33,7 +33,7 @@ function draw() {
 	translate(-width / 2, -height / 2);
 
 
-	for (let x = 10; x < width + 200; x += spacing) {
+	for (let x =100; x < width + 200; x += spacing) {
 		for (let y = -100; y < height + 200; y += spacing) {
 			push();
 			translate(x, y);
